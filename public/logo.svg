@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 40" fill="none">
+  <defs>
+    <linearGradient id="logoGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="50%" stop-color="#e2e8f0"/>
+      <stop offset="100%" stop-color="#94a3b8"/>
+    </linearGradient>
+  </defs>
+  
+  <!-- Stylized U -->
+  <path 
+    d="M8 8 L8 24 Q8 32 16 32 Q24 32 24 24 L24 8" 
+    stroke="url(#logoGrad)" 
+    stroke-width="3" 
+    stroke-linecap="round" 
+    stroke-linejoin="round"
+    fill="none"
+  />
+  
+  <!-- Stylized A with modern design -->
+  <path 
+    d="M32 32 L44 8 L56 32 M36 24 L52 24" 
+    stroke="url(#logoGrad)" 
+    stroke-width="3" 
+    stroke-linecap="round" 
+    stroke-linejoin="round"
+    fill="none"
+  />
+  
+  <!-- Decorative dot/accent -->
+  <circle cx="44" cy="6" r="2" fill="url(#logoGrad)"/>
+</svg>

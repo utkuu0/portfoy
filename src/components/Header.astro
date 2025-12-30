@@ -1,0 +1,124 @@
+---
+import { translations } from "../i18n/translations";
+
+interface Props {
+  links: { href: string; label: string; key: string }[];
+}
+
+const { links } = Astro.props;
+---
+
+<header class="fixed top-0 left-0 right-0 z-50 px-6 py-4">
+  <nav
+    class="relative max-w-6xl mx-auto bg-slate-900/80 backdrop-blur-xl border border-white/10 rounded-2xl px-6 py-3 flex items-center justify-between"
+  >
+    <!-- Logo - Left -->
+    <a href="/" class="flex items-center z-20">
+      <img src="/logo.svg" alt="UA Logo" class="h-8 w-auto" />
+    </a>
+
+    <!-- Navigation Links - Absolute Center -->
+    <div
+      class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 hidden md:block"
+    >
+      <ul class="flex items-center gap-2 list-none">
+        {
+          links.map((link) => (
+            <li>
+              <a
+                href={link.href}
+                class="relative px-4 py-2 rounded-full text-sm font-medium text-slate-400 hover:text-white transition-all duration-300 hover:bg-white/10 hover:shadow-[0_0_15px_rgba(255,255,255,0.1)] no-underline decoration-0 outline-none focus:outline-none border-none"
+                data-i18n={`nav.${link.key}`}
+              >
+                {link.label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+
+    <!-- Language Switcher - Right -->
+    <div class="relative group z-20 flex items-center gap-4">
+      <!-- Mobile Menu Button (Visible only on mobile) -->
+      <button class="md:hidden text-white">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke-width="1.5"
+          stroke="currentColor"
+          class="w-6 h-6"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"></path>
+        </svg>
+      </button>
+
+      <!-- Language Dropdown -->
+      <div class="relative">
+        <button
+          id="lang-btn"
+          class="flex items-center gap-3 px-4 py-2 rounded-xl bg-white/5 border border-white/10 text-slate-300 hover:text-white hover:bg-white/10 transition-all text-sm font-medium"
+        >
+          <img
+            src="/flags/tr.svg"
+            alt="TR"
+            id="current-lang-icon"
+            class="w-6 h-auto rounded shadow-sm object-cover"
+          />
+          <span class="uppercase font-semibold tracking-wider" id="current-lang"
+            >TR</span
+          >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="2"
+            stroke="currentColor"
+            class="w-3.5 h-3.5 text-slate-500 group-hover:text-white transition-colors duration-300"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M19.5 8.25l-7.5 7.5-7.5-7.5"></path>
+          </svg>
+        </button>
+
+        <!-- Dropdown Menu -->
+        <div
+          class="absolute right-0 top-full mt-2 w-40 bg-slate-900/95 backdrop-blur-xl border border-white/10 rounded-xl shadow-2xl shadow-black/50 overflow-hidden opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform origin-top-right translate-y-2 group-hover:translate-y-0"
+        >
+          <div class="p-1.5 space-y-1">
+            <button
+              class="lang-option w-full px-3 py-2.5 rounded-lg text-left text-sm text-slate-400 hover:text-white hover:bg-white/10 transition-all flex items-center gap-3 group/item"
+              data-lang="tr"
+              data-icon="/flags/tr.svg"
+            >
+              <img
+                src="/flags/tr.svg"
+                alt="TR"
+                class="w-6 h-auto rounded shadow-sm group-hover/item:scale-105 transition-transform"
+              />
+              <span class="font-medium">Türkçe</span>
+            </button>
+            <button
+              class="lang-option w-full px-3 py-2.5 rounded-lg text-left text-sm text-slate-400 hover:text-white hover:bg-white/10 transition-all flex items-center gap-3 group/item"
+              data-lang="en"
+              data-icon="/flags/en.svg"
+            >
+              <img
+                src="/flags/en.svg"
+                alt="EN"
+                class="w-6 h-auto rounded shadow-sm group-hover/item:scale-105 transition-transform"
+              />
+              <span class="font-medium">English</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
