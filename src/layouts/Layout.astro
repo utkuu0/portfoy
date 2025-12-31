@@ -16,61 +16,92 @@ const { title, description = "Yazılım Geliştirici Portföyü" } = Astro.props
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
     <title>{title}</title>
   </head>
   <body class="min-h-screen overflow-x-hidden">
     <!-- Background with Stars -->
     <div class="fixed inset-0 -z-10">
       <!-- Gradient orbs -->
-      <div class="absolute top-1/4 right-1/4 w-64 h-64 bg-slate-500/10 rounded-full blur-3xl"></div>
-      <div class="absolute bottom-1/4 left-1/4 w-48 h-48 bg-slate-400/10 rounded-full blur-3xl"></div>
-      
+      <div
+        class="absolute top-1/4 right-1/4 w-64 h-64 bg-slate-500/10 rounded-full blur-3xl"
+      >
+      </div>
+      <div
+        class="absolute bottom-1/4 left-1/4 w-48 h-48 bg-slate-400/10 rounded-full blur-3xl"
+      >
+      </div>
+
       <!-- Stars container -->
       <div id="stars" class="absolute inset-0"></div>
     </div>
-    
+
     <slot />
   </body>
 </html>
 
 <style>
   @import "../styles/global.css";
-  
+
   /* Star animations */
   @keyframes twinkle {
-    0%, 100% { opacity: 0.2; transform: scale(1); }
-    50% { opacity: 1; transform: scale(1.2); }
+    0%,
+    100% {
+      opacity: 0.2;
+      transform: scale(1);
+    }
+    50% {
+      opacity: 1;
+      transform: scale(1.2);
+    }
   }
-  
+
   @keyframes float-up {
-    0% { transform: translateY(0) translateX(0); opacity: 0.8; }
-    100% { transform: translateY(-100vh) translateX(20px); opacity: 0; }
+    0% {
+      transform: translateY(0) translateX(0);
+      opacity: 0.8;
+    }
+    100% {
+      transform: translateY(-100vh) translateX(20px);
+      opacity: 0;
+    }
   }
-  
+
   @keyframes drift {
-    0%, 100% { transform: translate(0, 0); }
-    25% { transform: translate(10px, -15px); }
-    50% { transform: translate(-5px, -25px); }
-    75% { transform: translate(15px, -10px); }
+    0%,
+    100% {
+      transform: translate(0, 0);
+    }
+    25% {
+      transform: translate(30px, -40px);
+    }
+    50% {
+      transform: translate(-20px, -60px);
+    }
+    75% {
+      transform: translate(40px, -25px);
+    }
   }
-  
+
   @keyframes shooting {
-    0% { 
+    0% {
       transform: translateX(0) translateY(0) rotate(-45deg);
       opacity: 1;
     }
-    100% { 
+    100% {
       transform: translateX(300px) translateY(300px) rotate(-45deg);
       opacity: 0;
     }
   }
-  
+
   .shooting-star {
     position: absolute;
     width: 100px;
     height: 2px;
-    background: linear-gradient(90deg, rgba(255,255,255,0.8), transparent);
+    background: linear-gradient(90deg, rgba(255, 255, 255, 0.8), transparent);
     border-radius: 50%;
     animation: shooting 2s ease-out forwards;
   }
@@ -79,45 +110,46 @@ const { title, description = "Yazılım Geliştirici Portföyü" } = Astro.props
 <script>
   // Generate random stars with enhanced animations
   function createStars() {
-    const starsContainer = document.getElementById('stars');
+    const starsContainer = document.getElementById("stars");
     if (!starsContainer) return;
-    
-    // Regular twinkling stars
-    const starCount = 100;
-    
+
+    // Regular twinkling stars - bigger and more animated
+    const starCount = 120;
+
     for (let i = 0; i < starCount; i++) {
-      const star = document.createElement('div');
-      const size = Math.random() * 4 + 2;
+      const star = document.createElement("div");
+      const size = Math.random() * 7 + 3; // Bigger stars: 3-10px
       const x = Math.random() * 100;
       const y = Math.random() * 100;
-      const twinkleDuration = Math.random() * 4 + 2;
-      const driftDuration = Math.random() * 20 + 15;
-      const delay = Math.random() * 5;
-      
+      const twinkleDuration = Math.random() * 2 + 1; // Faster twinkle: 1-3s
+      const driftDuration = Math.random() * 10 + 8; // Faster drift: 8-18s
+      const delay = Math.random() * 3;
+
       star.style.cssText = `
         position: absolute;
         left: ${x}%;
         top: ${y}%;
         width: ${size}px;
         height: ${size}px;
-        background: radial-gradient(circle, rgba(255,255,255,0.9) 0%, rgba(255,255,255,0) 70%);
+        background: radial-gradient(circle, rgba(255,255,255,1) 0%, rgba(255,255,255,0.3) 40%, rgba(255,255,255,0) 70%);
         border-radius: 50%;
+        box-shadow: 0 0 ${size * 2}px rgba(255,255,255,0.5);
         animation: 
           twinkle ${twinkleDuration}s ease-in-out ${delay}s infinite,
           drift ${driftDuration}s ease-in-out ${delay}s infinite;
       `;
-      
+
       starsContainer.appendChild(star);
     }
-    
+
     // Floating particles going up
     for (let i = 0; i < 15; i++) {
-      const particle = document.createElement('div');
+      const particle = document.createElement("div");
       const size = Math.random() * 3 + 1;
       const x = Math.random() * 100;
       const duration = Math.random() * 15 + 10;
       const delay = Math.random() * 10;
-      
+
       particle.style.cssText = `
         position: absolute;
         left: ${x}%;
@@ -128,37 +160,101 @@ const { title, description = "Yazılım Geliştirici Portföyü" } = Astro.props
         border-radius: 50%;
         animation: float-up ${duration}s linear ${delay}s infinite;
       `;
-      
+
       starsContainer.appendChild(particle);
     }
-    
+
     // Shooting stars (occasional)
     function createShootingStar() {
-      const shootingStar = document.createElement('div');
-      shootingStar.className = 'shooting-star';
+      const shootingStar = document.createElement("div");
+      shootingStar.className = "shooting-star";
       const x = Math.random() * 70;
       const y = Math.random() * 50;
-      
-      shootingStar.style.left = x + '%';
-      shootingStar.style.top = y + '%';
-      
+
+      shootingStar.style.left = x + "%";
+      shootingStar.style.top = y + "%";
+
       starsContainer.appendChild(shootingStar);
-      
+
       setTimeout(() => {
         shootingStar.remove();
       }, 2000);
     }
-    
+
     // Create shooting star every 4-8 seconds
     setInterval(() => {
       if (Math.random() > 0.3) {
         createShootingStar();
       }
     }, 4000);
-    
+
     // Initial shooting star
     setTimeout(createShootingStar, 2000);
   }
-  
+
   createStars();
+
+  // Mouse parallax effect
+  const starsContainer = document.getElementById("stars");
+  const orb1 = document.querySelector(".fixed > div:nth-child(1)");
+  const orb2 = document.querySelector(".fixed > div:nth-child(2)");
+
+  // Cursor glow trail
+  const cursorGlow = document.createElement("div");
+  cursorGlow.style.cssText = `
+    position: fixed;
+    width: 300px;
+    height: 300px;
+    background: radial-gradient(circle, rgba(148, 163, 184, 0.15) 0%, transparent 70%);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: -5;
+    transform: translate(-50%, -50%);
+    transition: opacity 0.3s ease;
+  `;
+  document.body.appendChild(cursorGlow);
+
+  let mouseX = 0;
+  let mouseY = 0;
+  let currentX = 0;
+  let currentY = 0;
+
+  document.addEventListener("mousemove", (e) => {
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+
+    // Move cursor glow
+    cursorGlow.style.left = mouseX + "px";
+    cursorGlow.style.top = mouseY + "px";
+  });
+
+  // Smooth parallax animation
+  function animateParallax() {
+    // Smooth interpolation
+    currentX += (mouseX - currentX) * 0.05;
+    currentY += (mouseY - currentY) * 0.05;
+
+    const centerX = window.innerWidth / 2;
+    const centerY = window.innerHeight / 2;
+
+    const deltaX = (currentX - centerX) / centerX;
+    const deltaY = (currentY - centerY) / centerY;
+
+    // Move stars container (subtle)
+    if (starsContainer) {
+      starsContainer.style.transform = `translate(${deltaX * 15}px, ${deltaY * 15}px)`;
+    }
+
+    // Move orbs (more dramatic)
+    if (orb1) {
+      orb1.style.transform = `translate(${deltaX * 40}px, ${deltaY * 40}px)`;
+    }
+    if (orb2) {
+      orb2.style.transform = `translate(${deltaX * -30}px, ${deltaY * -30}px)`;
+    }
+
+    requestAnimationFrame(animateParallax);
+  }
+
+  animateParallax();
 </script>
