@@ -1,25 +1,344 @@
 ---
 interface Props {
   name: string;
-  icon: string;
+  icon: string; // Now accepts image path like "/icons/kotlin.svg"
   level: number; // 1-100
 }
 
 const { name, icon, level } = Astro.props;
+
+// Calculate the stroke dasharray for the circular progress
+const radius = 40;
+const circumference = 2 * Math.PI * radius;
+const strokeDashoffset = circumference - (level / 100) * circumference;
+
+// Check if icon is an image path or emoji
+const isImagePath = icon.startsWith("/");
 ---
 
-<div class="glass glass-hover rounded-xl p-4 flex items-center gap-4">
-  <span class="text-3xl">{icon}</span>
-  <div class="flex-1">
-    <div class="flex items-center justify-between mb-2">
-      <span class="text-white font-medium">{name}</span>
-      <span class="text-sm text-slate-400">{level}%</span>
+<div class="skill-card group">
+  <div class="skill-inner">
+    <!-- Circular Progress Ring -->
+    <div class="circle-container">
+      <svg class="progress-ring" viewBox="0 0 100 100">
+        <!-- Background circle -->
+        <circle
+          class="progress-ring-bg"
+          cx="50"
+          cy="50"
+          r="40"
+          fill="none"
+          stroke-width="6"></circle>
+        <!-- Progress circle -->
+        <circle
+          class="progress-ring-circle"
+          cx="50"
+          cy="50"
+          r="40"
+          fill="none"
+          stroke-width="6"
+          stroke-linecap="round"
+          data-circumference={circumference}
+          data-target-offset={strokeDashoffset}
+          style={`stroke-dasharray: ${circumference}; stroke-dashoffset: ${circumference};`}
+        ></circle>
+      </svg>
+
+      <!-- Icon in center -->
+      <div class="skill-icon">
+        {
+          isImagePath ? (
+            <img
+              src={icon}
+              alt={name}
+              class="w-8 h-8 group-hover:scale-125 transition-transform duration-300"
+            />
+          ) : (
+            <span class="text-3xl group-hover:scale-125 transition-transform duration-300">
+              {icon}
+            </span>
+          )
+        }
+      </div>
+
+      <!-- Percentage display -->
+      <div class="percentage-badge">
+        <span
+          class="percentage-counter text-xs font-bold text-white"
+          data-target={level}>0%</span
+        >
+      </div>
     </div>
-    <div class="h-2 bg-slate-700/50 rounded-full overflow-hidden">
-      <div 
-        class="h-full bg-gradient-to-r from-slate-300 to-slate-500 rounded-full transition-all duration-1000 ease-out"
-        style={`width: ${level}%`}
-      ></div>
+
+    <!-- Skill name -->
+    <div class="skill-name">
+      <span class="text-white font-medium text-sm">{name}</span>
+    </div>
+
+    <!-- Floating particles on hover -->
+    <div class="particles">
+      <span class="particle"></span>
+      <span class="particle"></span>
+      <span class="particle"></span>
     </div>
   </div>
 </div>
+
+<style>
+  .skill-card {
+    position: relative;
+    padding: 1.5rem 1rem;
+    border-radius: 1.5rem;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(20px);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    overflow: hidden;
+  }
+
+  .skill-card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(
+      circle at 50% 0%,
+      rgba(148, 163, 184, 0.15),
+      transparent 60%
+    );
+    opacity: 0;
+    transition: opacity 0.4s ease;
+  }
+
+  .skill-card:hover {
+    transform: translateY(-8px);
+    border-color: rgba(148, 163, 184, 0.3);
+    box-shadow:
+      0 20px 40px rgba(0, 0, 0, 0.3),
+      0 0 60px rgba(148, 163, 184, 0.1),
+      inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  }
+
+  .skill-card:hover::before {
+    opacity: 1;
+  }
+
+  .skill-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    position: relative;
+    z-index: 1;
+  }
+
+  .circle-container {
+    position: relative;
+    width: 100px;
+    height: 100px;
+  }
+
+  .progress-ring {
+    width: 100%;
+    height: 100%;
+    transform: rotate(-90deg);
+  }
+
+  .progress-ring-bg {
+    stroke: rgba(148, 163, 184, 0.1);
+  }
+
+  .progress-ring-circle {
+    stroke: rgba(148, 163, 184, 0.8);
+    filter: drop-shadow(0 0 6px rgba(148, 163, 184, 0.5));
+  }
+
+  .skill-card:hover .progress-ring-circle {
+    stroke: rgba(248, 250, 252, 0.9);
+    filter: drop-shadow(0 0 12px rgba(248, 250, 252, 0.6));
+  }
+
+  .skill-icon {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: rgba(15, 23, 42, 0.8);
+  }
+
+  .percentage-badge {
+    position: absolute;
+    bottom: -4px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 0.25rem 0.75rem;
+    border-radius: 9999px;
+    background: linear-gradient(
+      135deg,
+      rgba(148, 163, 184, 0.3),
+      rgba(100, 116, 139, 0.3)
+    );
+    border: 1px solid rgba(148, 163, 184, 0.3);
+    backdrop-filter: blur(8px);
+  }
+
+  .skill-card:hover .percentage-badge {
+    background: linear-gradient(
+      135deg,
+      rgba(248, 250, 252, 0.2),
+      rgba(148, 163, 184, 0.2)
+    );
+    border-color: rgba(248, 250, 252, 0.4);
+    box-shadow: 0 0 20px rgba(248, 250, 252, 0.2);
+  }
+
+  .skill-name {
+    text-align: center;
+    padding: 0.5rem 1rem;
+    border-radius: 0.75rem;
+    background: rgba(255, 255, 255, 0.03);
+    transition: all 0.3s ease;
+  }
+
+  .skill-card:hover .skill-name {
+    background: rgba(255, 255, 255, 0.08);
+  }
+
+  /* Floating particles */
+  .particles {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+  }
+
+  .skill-card:hover .particles {
+    opacity: 1;
+  }
+
+  .particle {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background: rgba(248, 250, 252, 0.6);
+    border-radius: 50%;
+    animation: float-particle 3s ease-in-out infinite;
+  }
+
+  .particle:nth-child(1) {
+    left: 20%;
+    animation-delay: 0s;
+  }
+
+  .particle:nth-child(2) {
+    left: 50%;
+    animation-delay: 1s;
+  }
+
+  .particle:nth-child(3) {
+    left: 80%;
+    animation-delay: 2s;
+  }
+
+  @keyframes float-particle {
+    0%,
+    100% {
+      transform: translateY(100px) scale(0);
+      opacity: 0;
+    }
+    50% {
+      transform: translateY(0px) scale(1);
+      opacity: 1;
+    }
+  }
+</style>
+
+<script>
+  // Animate both counter and progress ring
+  const animateSkill = (card: Element) => {
+    const counter = card.querySelector(".percentage-counter") as HTMLElement;
+    const ring = card.querySelector(
+      ".progress-ring-circle",
+    ) as SVGCircleElement;
+
+    if (!counter || !ring) return;
+
+    const target = parseInt(counter.getAttribute("data-target") || "0");
+    const circumference = parseFloat(
+      ring.getAttribute("data-circumference") || "251",
+    );
+    const targetOffset = parseFloat(
+      ring.getAttribute("data-target-offset") || "0",
+    );
+
+    const duration = 2000; // 2 seconds
+    const startTime = performance.now();
+
+    const animate = (currentTime: number) => {
+      const elapsed = currentTime - startTime;
+      const progress = Math.min(elapsed / duration, 1);
+
+      // Easing function for smooth animation
+      const easeOutQuart = 1 - Math.pow(1 - progress, 4);
+
+      // Animate counter
+      const currentValue = Math.round(target * easeOutQuart);
+      counter.textContent = `${currentValue}%`;
+
+      // Animate ring
+      const currentOffset =
+        circumference - (circumference - targetOffset) * easeOutQuart;
+      ring.style.strokeDashoffset = `${currentOffset}`;
+
+      if (progress < 1) {
+        requestAnimationFrame(animate);
+      }
+    };
+
+    requestAnimationFrame(animate);
+  };
+
+  // Reset animation when leaving viewport
+  const resetSkill = (card: Element) => {
+    const counter = card.querySelector(".percentage-counter") as HTMLElement;
+    const ring = card.querySelector(
+      ".progress-ring-circle",
+    ) as SVGCircleElement;
+
+    if (!counter || !ring) return;
+
+    const circumference = parseFloat(
+      ring.getAttribute("data-circumference") || "251",
+    );
+    counter.textContent = "0%";
+    ring.style.strokeDashoffset = `${circumference}`;
+  };
+
+  // Use Intersection Observer to trigger animation when visible
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          // Animate when entering viewport
+          animateSkill(entry.target);
+        } else {
+          // Reset when leaving viewport
+          resetSkill(entry.target);
+        }
+      });
+    },
+    { threshold: 0.3 },
+  );
+
+  // Observe all skill cards
+  document.querySelectorAll(".skill-card").forEach((card) => {
+    observer.observe(card);
+  });
+</script>

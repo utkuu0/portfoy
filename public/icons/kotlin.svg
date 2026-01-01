@@ -1,0 +1,10 @@
+<svg viewBox="0 0 128 128" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="kotlin-a" x1="50%" y1="0%" x2="50%" y2="100%">
+      <stop offset="0%" stop-color="#E44857"/>
+      <stop offset="50%" stop-color="#C711E1"/>
+      <stop offset="100%" stop-color="#7F52FF"/>
+    </linearGradient>
+  </defs>
+  <path fill="url(#kotlin-a)" d="M0 0h128L64 64l64 64H0V0z"/>
+</svg>
