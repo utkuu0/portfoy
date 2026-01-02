@@ -8,6 +8,21 @@
 }
 
 /* Base Styles */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* Form Elements - ensure box-sizing is applied */
+input,
+textarea,
+select,
+button {
+  box-sizing: border-box !important;
+  max-width: 100%;
+}
+
 html {
   scroll-behavior: smooth;
 }

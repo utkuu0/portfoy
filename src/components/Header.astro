@@ -41,8 +41,12 @@ const { links } = Astro.props;
     <!-- Language Switcher - Right -->
     <div class="relative group z-20 flex items-center gap-4">
       <!-- Mobile Menu Button (Visible only on mobile) -->
-      <button class="md:hidden text-white">
+      <button
+        id="mobile-menu-btn"
+        class="md:hidden text-slate-400 p-2 rounded-xl hover:text-white hover:bg-white/10 transition-all duration-300"
+      >
         <svg
+          id="hamburger-icon"
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
           viewBox="0 0 24 24"
@@ -54,6 +58,20 @@ const { links } = Astro.props;
             stroke-linecap="round"
             stroke-linejoin="round"
             d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"></path>
+        </svg>
+        <svg
+          id="close-icon"
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke-width="1.5"
+          stroke="currentColor"
+          class="w-6 h-6 hidden"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M6 18L18 6M6 6l12 12"></path>
         </svg>
       </button>
 
@@ -121,4 +139,75 @@ const { links } = Astro.props;
       </div>
     </div>
   </nav>
+
+  <!-- Mobile Menu Panel -->
+  <div
+    id="mobile-menu"
+    class="md:hidden fixed left-6 right-6 top-20 bg-slate-900/80 backdrop-blur-xl border border-white/10 rounded-2xl shadow-2xl shadow-black/50 overflow-hidden transform origin-top scale-y-0 opacity-0 transition-all duration-300 ease-out"
+  >
+    <ul class="p-4 space-y-2 list-none">
+      {
+        links.map((link) => (
+          <li>
+            <a
+              href={link.href}
+              class="mobile-menu-link block px-4 py-3 rounded-xl text-base font-medium text-slate-400 hover:text-white hover:bg-white/10 hover:pl-6 hover:shadow-[0_0_20px_rgba(255,255,255,0.1)] transition-all duration-300 no-underline"
+              data-i18n={`nav.${link.key}`}
+            >
+              {link.label}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
 </header>
+
+<script>
+  // Mobile Menu Toggle
+  const mobileMenuBtn = document.getElementById("mobile-menu-btn");
+  const mobileMenu = document.getElementById("mobile-menu");
+  const hamburgerIcon = document.getElementById("hamburger-icon");
+  const closeIcon = document.getElementById("close-icon");
+  const mobileMenuLinks = document.querySelectorAll(".mobile-menu-link");
+
+  let isMenuOpen = false;
+
+  function toggleMenu() {
+    isMenuOpen = !isMenuOpen;
+
+    if (isMenuOpen) {
+      mobileMenu?.classList.remove("scale-y-0", "opacity-0");
+      mobileMenu?.classList.add("scale-y-100", "opacity-100");
+      hamburgerIcon?.classList.add("hidden");
+      closeIcon?.classList.remove("hidden");
+    } else {
+      mobileMenu?.classList.add("scale-y-0", "opacity-0");
+      mobileMenu?.classList.remove("scale-y-100", "opacity-100");
+      hamburgerIcon?.classList.remove("hidden");
+      closeIcon?.classList.add("hidden");
+    }
+  }
+
+  mobileMenuBtn?.addEventListener("click", toggleMenu);
+
+  // Close menu when clicking a link
+  mobileMenuLinks.forEach((link) => {
+    link.addEventListener("click", () => {
+      if (isMenuOpen) {
+        toggleMenu();
+      }
+    });
+  });
+
+  // Close menu when clicking outside
+  document.addEventListener("click", (e) => {
+    if (
+      isMenuOpen &&
+      !mobileMenu?.contains(e.target as Node) &&
+      !mobileMenuBtn?.contains(e.target as Node)
+    ) {
+      toggleMenu();
+    }
+  });
+</script>
