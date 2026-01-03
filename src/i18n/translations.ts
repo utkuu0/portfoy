@@ -24,7 +24,7 @@ export const translations = {
     projects: {
       title: "Projeler",
       subtitle: "Üzerinde çalıştığım ve geliştirdiğim projelerden bazıları",
-      view_projects: "Projelerimi Gör" // CTA if needed
+      view_projects: "Projelerimi Gör"
     },
     skills: {
       title: "Yetenekler",
@@ -43,7 +43,9 @@ export const translations = {
     },
     footer: {
       tagline: "Yazılım ile fikirler hayat buluyor.",
-      rights: "Tüm hakları saklıdır."
+      rights: "Tüm hakları saklıdır.",
+      builtWith: "Geliştirildi:",
+      designedIn: "Tasarlandı:"
     }
   },
   en: {
@@ -90,7 +92,9 @@ export const translations = {
     },
     footer: {
       tagline: "Software brings ideas to life.",
-      rights: "All rights reserved."
+      rights: "All rights reserved.",
+      builtWith: "Built with",
+      designedIn: "Designed in"
     }
   }
 };
