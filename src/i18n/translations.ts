@@ -4,7 +4,8 @@ export const translations = {
       about: "Hakkımda",
       projects: "Projeler",
       skills: "Yetenekler",
-      contact: "İletişim"
+      contact: "İletişim",
+      language: "Dil"
     },
     hero: {
       greeting: "Merhaba, ben",
@@ -13,12 +14,15 @@ export const translations = {
     },
     about: {
       title: "Hakkımda",
-      p1: "Yazılım geliştirme tutkusuyla dolu bir geliştiriciyim. Android uygulamalarından web projelerine kadar geniş bir yelpazede çalışıyorum.",
-      p2: "Modern teknolojileri kullanarak kullanıcı dostu ve performanslı uygulamalar geliştirmeyi seviyorum. Sürekli öğrenme ve kendimi geliştirme konusunda tutkuluyum.",
+      whoAmI: "Ben Kimim?",
+      whatIDo: "Ne Yapıyorum?",
+      p1: "Merhaba! Ben Muhammed Utku AKSU, yazılım geliştirme tutkusuyla dolu bir geliştiriciyim. Bilgisayar Mühendisliği öğrencisi olarak hem akademik hem de pratik alanda kendimi sürekli geliştiriyorum.",
+      p2: "Android uygulamalarından web projelerine kadar geniş bir yelpazede çalışıyorum. Kotlin ile mobil uygulama geliştirme konusunda uzmanlaşırken, modern web teknolojilerini de aktif olarak kullanıyorum.",
+      p3: "Modern teknolojileri kullanarak kullanıcı dostu ve performanslı uygulamalar geliştirmeyi seviyorum. Clean Architecture, MVVM gibi yazılım mimarilerini uygulayarak sürdürülebilir ve ölçeklenebilir projeler oluşturuyorum.",
+      p4: "Sürekli öğrenme ve kendimi geliştirme konusunda tutkuluyum. Yeni teknolojileri keşfetmek, açık kaynak projelere katkıda bulunmak ve bilgimi paylaşmak benim için büyük bir motivasyon kaynağı.",
       stats: {
         experience: "Yıl Deneyim",
-        projects: "Proje",
-        clients: "Mutlu Müşteri"
+        projects: "Proje"
       }
     },
     projects: {
@@ -53,7 +57,8 @@ export const translations = {
       about: "About",
       projects: "Projects",
       skills: "Skills",
-      contact: "Contact"
+      contact: "Contact",
+      language: "Language"
     },
     hero: {
       greeting: "Hello, I'm",
@@ -62,12 +67,15 @@ export const translations = {
     },
     about: {
       title: "About Me",
-      p1: "I am a developer full of passion for software development. I work in a wide range from Android applications to web projects.",
-      p2: "I love developing user-friendly and performant applications using modern technologies. I am passionate about continuous learning and self-improvement.",
+      whoAmI: "Who Am I?",
+      whatIDo: "What I Do?",
+      p1: "Hello! I'm Muhammed Utku AKSU, a developer full of passion for software development. As a Computer Engineering student, I continuously improve myself both academically and practically.",
+      p2: "I work in a wide range from Android applications to web projects. While specializing in mobile app development with Kotlin, I also actively use modern web technologies.",
+      p3: "I love developing user-friendly and performant applications using modern technologies. I create sustainable and scalable projects by implementing software architectures such as Clean Architecture and MVVM.",
+      p4: "I am passionate about continuous learning and self-improvement. Exploring new technologies, contributing to open source projects, and sharing my knowledge is a great source of motivation for me.",
       stats: {
         experience: "Years Experience",
-        projects: "Projects",
-        clients: "Happy Clients"
+        projects: "Projects"
       }
     },
     projects: {

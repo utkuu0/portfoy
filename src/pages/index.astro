@@ -44,11 +44,11 @@ const projects = [
 ];
 
 const skills = [
-  { name: "Kotlin", icon: "/icons/kotlin.svg", level: 85 },
-  { name: "React Native", icon: "/icons/react.svg", level: 40 },
-  { name: "Python", icon: "/icons/python.svg", level: 70 },
-  { name: "Git / GitHub", icon: "/icons/github.svg", level: 65 },
-  { name: "Ruby", icon: "/icons/ruby.png", level: 35 },
+  { name: "Kotlin", icon: "/icons/kotlin.svg", years: "2+" },
+  { name: "React Native", icon: "/icons/react.svg", years: "~1" },
+  { name: "Python", icon: "/icons/python.svg", years: "~1" },
+  { name: "Git / GitHub", icon: "/icons/github.svg", years: "~2" },
+  { name: "Ruby", icon: "/icons/ruby.png", years: "~1" },
 ];
 ---
 
@@ -100,41 +100,70 @@ const skills = [
     <!-- About Section -->
     <section id="hakkimda" class="py-24 px-6">
       <div class="max-w-4xl mx-auto">
-        <h2 class="text-3xl md:text-4xl font-bold mb-8 text-center">
+        <h2 class="text-3xl md:text-4xl font-bold mb-12 text-center">
           <span class="gradient-text" data-i18n="about.title">Hakkımda</span>
         </h2>
-        <p
-          class="text-slate-300 text-lg leading-relaxed mb-6 text-center"
-          data-i18n="about.p1"
-        >
-          Yazılım geliştirme tutkusuyla dolu bir geliştiriciyim. Android
-          uygulamalarından web projelerine kadar geniş bir yelpazede
-          çalışıyorum.
-        </p>
-        <p
-          class="text-slate-400 leading-relaxed mb-10 text-center"
-          data-i18n="about.p2"
-        >
-          Modern teknolojileri kullanarak kullanıcı dostu ve performanslı
-          uygulamalar geliştirmeyi seviyorum. Sürekli öğrenme ve kendimi
-          geliştirme konusunda tutkuluyum.
-        </p>
+
+        <!-- Who Am I -->
+        <div class="glass rounded-2xl p-8 mb-8">
+          <h3
+            class="text-xl font-semibold text-white mb-4"
+            data-i18n="about.whoAmI"
+          >
+            Ben Kimim?
+          </h3>
+          <p
+            class="text-slate-300 text-lg leading-relaxed mb-4"
+            data-i18n="about.p1"
+          >
+            Merhaba! Ben Muhammed Utku AKSU, yazılım geliştirme tutkusuyla dolu
+            bir geliştiriciyim. Bilgisayar Mühendisliği öğrencisi olarak hem
+            akademik hem de pratik alanda kendimi sürekli geliştiriyorum.
+          </p>
+          <p class="text-slate-400 leading-relaxed" data-i18n="about.p2">
+            Android uygulamalarından web projelerine kadar geniş bir yelpazede
+            çalışıyorum. Kotlin ile mobil uygulama geliştirme konusunda
+            uzmanlaşırken, modern web teknolojilerini de aktif olarak
+            kullanıyorum.
+          </p>
+        </div>
+
+        <!-- What I Do -->
+        <div class="glass rounded-2xl p-8 mb-8">
+          <h3
+            class="text-xl font-semibold text-white mb-4"
+            data-i18n="about.whatIDo"
+          >
+            Ne Yapıyorum?
+          </h3>
+          <p class="text-slate-300 leading-relaxed mb-4" data-i18n="about.p3">
+            Modern teknolojileri kullanarak kullanıcı dostu ve performanslı
+            uygulamalar geliştirmeyi seviyorum. Clean Architecture, MVVM gibi
+            yazılım mimarilerini uygulayarak sürdürülebilir ve ölçeklenebilir
+            projeler oluşturuyorum.
+          </p>
+          <p class="text-slate-400 leading-relaxed" data-i18n="about.p4">
+            Sürekli öğrenme ve kendimi geliştirme konusunda tutkuluyum. Yeni
+            teknolojileri keşfetmek, açık kaynak projelere katkıda bulunmak ve
+            bilgimi paylaşmak benim için büyük bir motivasyon kaynağı.
+          </p>
+        </div>
 
         <!-- Stats -->
         <div class="grid grid-cols-2 gap-4 max-w-md mx-auto">
-          <div class="glass rounded-xl p-4 text-center">
-            <div class="text-3xl font-bold gradient-text mb-1">2+</div>
+          <div class="glass rounded-xl p-6 text-center">
+            <div class="text-4xl font-bold gradient-text mb-2">2+</div>
             <div
-              class="text-xs text-slate-500 uppercase tracking-widest"
+              class="text-sm text-slate-400"
               data-i18n="about.stats.experience"
             >
               Yıl Deneyim
             </div>
           </div>
-          <div class="glass rounded-xl p-4 text-center">
-            <div class="text-3xl font-bold gradient-text mb-1">5+</div>
+          <div class="glass rounded-xl p-6 text-center">
+            <div class="text-4xl font-bold gradient-text mb-2">5+</div>
             <div
-              class="text-xs text-slate-500 uppercase tracking-widest"
+              class="text-sm text-slate-400"
               data-i18n="about.stats.projects"
             >
               Proje
@@ -628,15 +657,41 @@ const skills = [
       currentLangIcon.src = lang === "tr" ? "/flags/tr.svg" : "/flags/en.svg";
     }
 
-    // Hide current language from dropdown
-    document.querySelectorAll(".lang-option").forEach((option) => {
+    // Update mobile language buttons styling (show both, highlight active)
+    document.querySelectorAll(".mobile-lang-option").forEach((option) => {
       const optionLang = option.getAttribute("data-lang");
       if (optionLang === lang) {
-        option.style.display = "none";
+        // Active language styling
+        option.classList.add(
+          "bg-white/20",
+          "text-white",
+          "border",
+          "border-white/30",
+        );
+        option.classList.remove("bg-white/5", "text-slate-400");
       } else {
-        option.style.display = "flex";
+        // Inactive language styling
+        option.classList.remove(
+          "bg-white/20",
+          "text-white",
+          "border",
+          "border-white/30",
+        );
+        option.classList.add("bg-white/5", "text-slate-400");
       }
     });
+
+    // Hide current language from desktop dropdown only
+    document
+      .querySelectorAll(".lang-option:not(.mobile-lang-option)")
+      .forEach((option) => {
+        const optionLang = option.getAttribute("data-lang");
+        if (optionLang === lang) {
+          option.style.display = "none";
+        } else {
+          option.style.display = "flex";
+        }
+      });
 
     // Save preference
     localStorage.setItem("language", lang);

@@ -75,8 +75,8 @@ const { links } = Astro.props;
         </svg>
       </button>
 
-      <!-- Language Dropdown -->
-      <div class="relative">
+      <!-- Language Dropdown (Desktop only) -->
+      <div class="relative hidden md:block">
         <button
           id="lang-btn"
           class="flex items-center gap-3 px-4 py-2 rounded-xl bg-white/5 border border-white/10 text-slate-300 hover:text-white hover:bg-white/10 transition-all text-sm font-medium"
@@ -160,6 +160,31 @@ const { links } = Astro.props;
         ))
       }
     </ul>
+
+    <!-- Mobile Language Switcher -->
+    <div class="px-4 pb-4 pt-2 border-t border-white/10">
+      <p class="text-xs text-slate-500 mb-2 px-1" data-i18n="nav.language">
+        Dil
+      </p>
+      <div class="flex gap-2">
+        <button
+          class="lang-option mobile-lang-option flex-1 px-3 py-2.5 rounded-xl text-sm text-slate-400 hover:text-white bg-white/5 hover:bg-white/10 transition-all flex items-center justify-center gap-2"
+          data-lang="tr"
+          data-icon="/flags/tr.svg"
+        >
+          <img src="/flags/tr.svg" alt="TR" class="w-5 h-auto rounded" />
+          <span class="font-medium">TR</span>
+        </button>
+        <button
+          class="lang-option mobile-lang-option flex-1 px-3 py-2.5 rounded-xl text-sm text-slate-400 hover:text-white bg-white/5 hover:bg-white/10 transition-all flex items-center justify-center gap-2"
+          data-lang="en"
+          data-icon="/flags/en.svg"
+        >
+          <img src="/flags/en.svg" alt="EN" class="w-5 h-auto rounded" />
+          <span class="font-medium">EN</span>
+        </button>
+      </div>
+    </div>
   </div>
 </header>
 
