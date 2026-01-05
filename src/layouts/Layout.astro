@@ -1,4 +1,6 @@
 ---
+import "../styles/global.css";
+
 interface Props {
   title: string;
   description?: string;
@@ -44,8 +46,6 @@ const { title, description = "Yazılım Geliştirici Portföyü" } = Astro.props
 </html>
 
 <style>
-  @import "../styles/global.css";
-
   /* Star animations */
   @keyframes twinkle {
     0%,
