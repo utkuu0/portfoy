@@ -47,38 +47,41 @@ veya direkt ulaşın
 ·
 <span data-i18n="footer.designedIn">Designed in</span> <span class="text-slate-500">Türkiye</span> </p> <p class="text-xs text-slate-600">
 © 2026 Muhammed Utku AKSU
-</p> </div> </div> </footer>   <script type="module">function b(){const e=document.getElementById("stars");if(!e)return;const r=120;for(let t=0;t<r;t++){const o=document.createElement("div"),n=Math.random()*7+3,i=Math.random()*100,d=Math.random()*100,c=Math.random()*2+1,$=Math.random()*10+8,p=Math.random()*3;o.style.cssText=`
+</p> </div> </div> </footer>   <script type="module">function p(){const a=document.getElementById("stars");if(!a)return;const s=window.innerWidth<768,l=s?40:120;for(let t=0;t<l;t++){const n=document.createElement("div"),e=Math.random()*7+3,o=Math.random()*100,c=Math.random()*100,i=Math.random()*2+1,d=Math.random()*10+8,u=Math.random()*3;n.style.cssText=`
         position: absolute;
-        left: ${i}%;
-        top: ${d}%;
-        width: ${n}px;
-        height: ${n}px;
+        left: ${o}%;
+        top: ${c}%;
+        width: ${e}px;
+        height: ${e}px;
         background: radial-gradient(circle, rgba(255,255,255,1) 0%, rgba(255,255,255,0.3) 40%, rgba(255,255,255,0) 70%);
         border-radius: 50%;
-        box-shadow: 0 0 ${n*2}px rgba(255,255,255,0.5);
+        box-shadow: 0 0 ${e*2}px rgba(255,255,255,0.5);
+        will-change: transform, opacity;
         animation: 
-          twinkle ${c}s ease-in-out ${p}s infinite,
-          drift ${$}s ease-in-out ${p}s infinite;
-      `,e.appendChild(o)}for(let t=0;t<15;t++){const o=document.createElement("div"),n=Math.random()*3+1,i=Math.random()*100,d=Math.random()*15+10,c=Math.random()*10;o.style.cssText=`
+          twinkle ${i}s ease-in-out ${u}s infinite,
+          drift ${d}s ease-in-out ${u}s infinite;
+      `,a.appendChild(n)}const m=s?5:15;for(let t=0;t<m;t++){const n=document.createElement("div"),e=Math.random()*3+1,o=Math.random()*100,c=Math.random()*15+10,i=Math.random()*10;n.style.cssText=`
         position: absolute;
-        left: ${i}%;
+        left: ${o}%;
         bottom: -10px;
-        width: ${n}px;
-        height: ${n}px;
+        width: ${e}px;
+        height: ${e}px;
         background: rgba(255,255,255,0.5);
         border-radius: 50%;
-        animation: float-up ${d}s linear ${c}s infinite;
-      `,e.appendChild(o)}function a(){const t=document.createElement("div");t.className="shooting-star";const o=Math.random()*70,n=Math.random()*50;t.style.left=o+"%",t.style.top=n+"%",e.appendChild(t),setTimeout(()=>{t.remove()},2e3)}setInterval(()=>{Math.random()>.3&&a()},4e3),setTimeout(a,2e3)}b();const x=document.getElementById("stars"),f=document.querySelector(".fixed > div:nth-child(1)"),g=document.querySelector(".fixed > div:nth-child(2)"),s=document.createElement("div");s.style.cssText=`
-    position: fixed;
-    width: 300px;
-    height: 300px;
-    background: radial-gradient(circle, rgba(148, 163, 184, 0.15) 0%, transparent 70%);
-    border-radius: 50%;
-    pointer-events: none;
-    z-index: -5;
-    transform: translate(-50%, -50%);
-    transition: opacity 0.3s ease;
-  `;document.body.appendChild(s);let u=0,h=0,l=0,m=0;document.addEventListener("mousemove",e=>{u=e.clientX,h=e.clientY,s.style.left=u+"px",s.style.top=h+"px"});function y(){l+=(u-l)*.05,m+=(h-m)*.05;const e=window.innerWidth/2,r=window.innerHeight/2,a=(l-e)/e,t=(m-r)/r;x&&(x.style.transform=`translate(${a*15}px, ${t*15}px)`),f&&(f.style.transform=`translate(${a*40}px, ${t*40}px)`),g&&(g.style.transform=`translate(${a*-30}px, ${t*-30}px)`),requestAnimationFrame(y)}y();</script></body></html> <script>(function(){const translations = {"tr":{"nav":{"about":"Hakkımda","projects":"Projeler","skills":"Yetenekler","contact":"İletişim","language":"Dil"},"hero":{"greeting":"Merhaba, ben","role":"Full Stack & Mobile Developer","description":"Modern web ve mobil uygulamalar geliştiriyorum. Kullanıcı deneyimi odaklı, performanslı ve ölçeklenebilir çözümler sunuyorum."},"about":{"title":"Hakkımda","whoAmI":"Ben Kimim?","whatIDo":"Ne Yapıyorum?","p1":"Merhaba! Ben Muhammed Utku AKSU, yazılım geliştirme tutkusuyla dolu bir geliştiriciyim. Bilgisayar Mühendisliği öğrencisi olarak hem akademik hem de pratik alanda kendimi sürekli geliştiriyorum.","p2":"Android uygulamalarından web projelerine kadar geniş bir yelpazede çalışıyorum. Kotlin ile mobil uygulama geliştirme konusunda uzmanlaşırken, modern web teknolojilerini de aktif olarak kullanıyorum.","p3":"Modern teknolojileri kullanarak kullanıcı dostu ve performanslı uygulamalar geliştirmeyi seviyorum. Clean Architecture, MVVM gibi yazılım mimarilerini uygulayarak sürdürülebilir ve ölçeklenebilir projeler oluşturuyorum.","p4":"Sürekli öğrenme ve kendimi geliştirme konusunda tutkuluyum. Yeni teknolojileri keşfetmek, açık kaynak projelere katkıda bulunmak ve bilgimi paylaşmak benim için büyük bir motivasyon kaynağı.","stats":{"experience":"Yıl Deneyim","projects":"Proje"}},"projects":{"title":"Projeler","subtitle":"Üzerinde çalıştığım ve geliştirdiğim projelerden bazıları","view_projects":"Projelerimi Gör"},"skills":{"title":"Yetenekler","subtitle":"Kullandığım teknolojiler ve araçlar"},"contact":{"title":"İletişime Geçin","subtitle":"Bir proje fikriniz mi var? Birlikte çalışmak ister misiniz? Bana ulaşın!","form":{"name":"Adınız","email":"E-posta adresiniz","subject":"Konu","message":"Mesajınız...","submit":"Mesaj Gönder"}},"footer":{"tagline":"Yazılım ile fikirler hayat buluyor.","rights":"Tüm hakları saklıdır.","builtWith":"Geliştirildi:","designedIn":"Tasarlandı:"}},"en":{"nav":{"about":"About","projects":"Projects","skills":"Skills","contact":"Contact","language":"Language"},"hero":{"greeting":"Hello, I'm","role":"Full Stack & Mobile Developer","description":"I build modern web and mobile applications. I provide user experience focused, performant and scalable solutions."},"about":{"title":"About Me","whoAmI":"Who Am I?","whatIDo":"What I Do?","p1":"Hello! I'm Muhammed Utku AKSU, a developer full of passion for software development. As a Computer Engineering student, I continuously improve myself both academically and practically.","p2":"I work in a wide range from Android applications to web projects. While specializing in mobile app development with Kotlin, I also actively use modern web technologies.","p3":"I love developing user-friendly and performant applications using modern technologies. I create sustainable and scalable projects by implementing software architectures such as Clean Architecture and MVVM.","p4":"I am passionate about continuous learning and self-improvement. Exploring new technologies, contributing to open source projects, and sharing my knowledge is a great source of motivation for me.","stats":{"experience":"Years Experience","projects":"Projects"}},"projects":{"title":"Projects","subtitle":"Some of the projects I have worked on and developed","view_projects":"View Projects"},"skills":{"title":"Skills","subtitle":"Technologies and tools I use"},"contact":{"title":"Get in Touch","subtitle":"Have a project idea? Want to work together? Contact me!","form":{"name":"Your Name","email":"Your Email","subject":"Subject","message":"Your Message...","submit":"Send Message"}},"footer":{"tagline":"Software brings ideas to life.","rights":"All rights reserved.","builtWith":"Built with","designedIn":"Designed in"}}};
+        will-change: transform;
+        animation: float-up ${c}s linear ${i}s infinite;
+      `,a.appendChild(n)}function r(){if(!a)return;const t=document.createElement("div");t.className="shooting-star";const n=Math.random()*70,e=Math.random()*50;t.style.left=n+"%",t.style.top=e+"%",a.appendChild(t),setTimeout(()=>{t.remove()},2e3)}setInterval(()=>{Math.random()>.3&&r()},s?8e3:4e3),setTimeout(r,2e3)}p();if(window.matchMedia("(hover: hover)").matches){let a=function(){n+=(h-n)*.05,e+=(t-e)*.05;const o=window.innerWidth/2,c=window.innerHeight/2,i=(n-o)/o,d=(e-c)/c;s&&(s.style.transform=`translate(${i*15}px, ${d*15}px)`),l instanceof HTMLElement&&(l.style.transform=`translate(${i*40}px, ${d*40}px)`),m instanceof HTMLElement&&(m.style.transform=`translate(${i*-30}px, ${d*-30}px)`),requestAnimationFrame(a)};const s=document.getElementById("stars"),l=document.querySelector(".fixed > div:nth-child(1)"),m=document.querySelector(".fixed > div:nth-child(2)"),r=document.createElement("div");r.style.cssText=`
+      position: fixed;
+      width: 300px;
+      height: 300px;
+      background: radial-gradient(circle, rgba(148, 163, 184, 0.15) 0%, transparent 70%);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: -5;
+      transform: translate(-50%, -50%);
+      transition: opacity 0.3s ease;
+      will-change: transform;
+    `,document.body.appendChild(r);let h=0,t=0,n=0,e=0;document.addEventListener("mousemove",o=>{h=o.clientX,t=o.clientY,r.style.left=h+"px",r.style.top=t+"px"}),a()}</script></body></html> <script>(function(){const translations = {"tr":{"nav":{"about":"Hakkımda","projects":"Projeler","skills":"Yetenekler","contact":"İletişim","language":"Dil"},"hero":{"greeting":"Merhaba, ben","role":"Full Stack & Mobile Developer","description":"Modern web ve mobil uygulamalar geliştiriyorum. Kullanıcı deneyimi odaklı, performanslı ve ölçeklenebilir çözümler sunuyorum."},"about":{"title":"Hakkımda","whoAmI":"Ben Kimim?","whatIDo":"Ne Yapıyorum?","p1":"Merhaba! Ben Muhammed Utku AKSU, yazılım geliştirme tutkusuyla dolu bir geliştiriciyim. Bilgisayar Mühendisliği öğrencisi olarak hem akademik hem de pratik alanda kendimi sürekli geliştiriyorum.","p2":"Android uygulamalarından web projelerine kadar geniş bir yelpazede çalışıyorum. Kotlin ile mobil uygulama geliştirme konusunda uzmanlaşırken, modern web teknolojilerini de aktif olarak kullanıyorum.","p3":"Modern teknolojileri kullanarak kullanıcı dostu ve performanslı uygulamalar geliştirmeyi seviyorum. Clean Architecture, MVVM gibi yazılım mimarilerini uygulayarak sürdürülebilir ve ölçeklenebilir projeler oluşturuyorum.","p4":"Sürekli öğrenme ve kendimi geliştirme konusunda tutkuluyum. Yeni teknolojileri keşfetmek, açık kaynak projelere katkıda bulunmak ve bilgimi paylaşmak benim için büyük bir motivasyon kaynağı.","stats":{"experience":"Yıl Deneyim","projects":"Proje"}},"projects":{"title":"Projeler","subtitle":"Üzerinde çalıştığım ve geliştirdiğim projelerden bazıları","view_projects":"Projelerimi Gör"},"skills":{"title":"Yetenekler","subtitle":"Kullandığım teknolojiler ve araçlar"},"contact":{"title":"İletişime Geçin","subtitle":"Bir proje fikriniz mi var? Birlikte çalışmak ister misiniz? Bana ulaşın!","form":{"name":"Adınız","email":"E-posta adresiniz","subject":"Konu","message":"Mesajınız...","submit":"Mesaj Gönder"}},"footer":{"tagline":"Yazılım ile fikirler hayat buluyor.","rights":"Tüm hakları saklıdır.","builtWith":"Geliştirildi:","designedIn":"Tasarlandı:"}},"en":{"nav":{"about":"About","projects":"Projects","skills":"Skills","contact":"Contact","language":"Language"},"hero":{"greeting":"Hello, I'm","role":"Full Stack & Mobile Developer","description":"I build modern web and mobile applications. I provide user experience focused, performant and scalable solutions."},"about":{"title":"About Me","whoAmI":"Who Am I?","whatIDo":"What I Do?","p1":"Hello! I'm Muhammed Utku AKSU, a developer full of passion for software development. As a Computer Engineering student, I continuously improve myself both academically and practically.","p2":"I work in a wide range from Android applications to web projects. While specializing in mobile app development with Kotlin, I also actively use modern web technologies.","p3":"I love developing user-friendly and performant applications using modern technologies. I create sustainable and scalable projects by implementing software architectures such as Clean Architecture and MVVM.","p4":"I am passionate about continuous learning and self-improvement. Exploring new technologies, contributing to open source projects, and sharing my knowledge is a great source of motivation for me.","stats":{"experience":"Years Experience","projects":"Projects"}},"projects":{"title":"Projects","subtitle":"Some of the projects I have worked on and developed","view_projects":"View Projects"},"skills":{"title":"Skills","subtitle":"Technologies and tools I use"},"contact":{"title":"Get in Touch","subtitle":"Have a project idea? Want to work together? Contact me!","form":{"name":"Your Name","email":"Your Email","subject":"Subject","message":"Your Message...","submit":"Send Message"}},"footer":{"tagline":"Software brings ideas to life.","rights":"All rights reserved.","builtWith":"Built with","designedIn":"Designed in"}}};
 
   // Language switching logic
   function updateLanguage(lang) {
