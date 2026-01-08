@@ -113,8 +113,11 @@ const { title, description = "Yazılım Geliştirici Portföyü" } = Astro.props
     const starsContainer = document.getElementById("stars");
     if (!starsContainer) return;
 
-    // Regular twinkling stars - bigger and more animated
-    const starCount = 120;
+    // Detect device capability
+    const isMobile = window.innerWidth < 768;
+
+    // Reduce star count significantly on mobile
+    const starCount = isMobile ? 40 : 120;
 
     for (let i = 0; i < starCount; i++) {
       const star = document.createElement("div");
@@ -134,6 +137,7 @@ const { title, description = "Yazılım Geliştirici Portföyü" } = Astro.props
         background: radial-gradient(circle, rgba(255,255,255,1) 0%, rgba(255,255,255,0.3) 40%, rgba(255,255,255,0) 70%);
         border-radius: 50%;
         box-shadow: 0 0 ${size * 2}px rgba(255,255,255,0.5);
+        will-change: transform, opacity;
         animation: 
           twinkle ${twinkleDuration}s ease-in-out ${delay}s infinite,
           drift ${driftDuration}s ease-in-out ${delay}s infinite;
@@ -142,8 +146,10 @@ const { title, description = "Yazılım Geliştirici Portföyü" } = Astro.props
       starsContainer.appendChild(star);
     }
 
-    // Floating particles going up
-    for (let i = 0; i < 15; i++) {
+    // Floating particles - reduce on mobile
+    const particleCount = isMobile ? 5 : 15;
+
+    for (let i = 0; i < particleCount; i++) {
       const particle = document.createElement("div");
       const size = Math.random() * 3 + 1;
       const x = Math.random() * 100;
@@ -158,6 +164,7 @@ const { title, description = "Yazılım Geliştirici Portföyü" } = Astro.props
         height: ${size}px;
         background: rgba(255,255,255,0.5);
         border-radius: 50%;
+        will-change: transform;
         animation: float-up ${duration}s linear ${delay}s infinite;
       `;
 
@@ -166,6 +173,7 @@ const { title, description = "Yazılım Geliştirici Portföyü" } = Astro.props
 
     // Shooting stars (occasional)
     function createShootingStar() {
+      if (!starsContainer) return;
       const shootingStar = document.createElement("div");
       shootingStar.className = "shooting-star";
       const x = Math.random() * 70;
@@ -181,12 +189,14 @@ const { title, description = "Yazılım Geliştirici Portföyü" } = Astro.props
       }, 2000);
     }
 
-    // Create shooting star every 4-8 seconds
+    // Reduce frequency of shooting stars on mobile
+    const shootingStarInterval = isMobile ? 8000 : 4000;
+
     setInterval(() => {
       if (Math.random() > 0.3) {
         createShootingStar();
       }
-    }, 4000);
+    }, shootingStarInterval);
 
     // Initial shooting star
     setTimeout(createShootingStar, 2000);
@@ -194,67 +204,70 @@ const { title, description = "Yazılım Geliştirici Portföyü" } = Astro.props
 
   createStars();
 
-  // Mouse parallax effect
-  const starsContainer = document.getElementById("stars");
-  const orb1 = document.querySelector(".fixed > div:nth-child(1)");
-  const orb2 = document.querySelector(".fixed > div:nth-child(2)");
+  // Mouse parallax effect - ONLY for devices with mouse (hover capability)
+  if (window.matchMedia("(hover: hover)").matches) {
+    const starsContainer = document.getElementById("stars");
+    const orb1 = document.querySelector(".fixed > div:nth-child(1)");
+    const orb2 = document.querySelector(".fixed > div:nth-child(2)");
 
-  // Cursor glow trail
-  const cursorGlow = document.createElement("div");
-  cursorGlow.style.cssText = `
-    position: fixed;
-    width: 300px;
-    height: 300px;
-    background: radial-gradient(circle, rgba(148, 163, 184, 0.15) 0%, transparent 70%);
-    border-radius: 50%;
-    pointer-events: none;
-    z-index: -5;
-    transform: translate(-50%, -50%);
-    transition: opacity 0.3s ease;
-  `;
-  document.body.appendChild(cursorGlow);
+    // Cursor glow trail
+    const cursorGlow = document.createElement("div");
+    cursorGlow.style.cssText = `
+      position: fixed;
+      width: 300px;
+      height: 300px;
+      background: radial-gradient(circle, rgba(148, 163, 184, 0.15) 0%, transparent 70%);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: -5;
+      transform: translate(-50%, -50%);
+      transition: opacity 0.3s ease;
+      will-change: transform;
+    `;
+    document.body.appendChild(cursorGlow);
 
-  let mouseX = 0;
-  let mouseY = 0;
-  let currentX = 0;
-  let currentY = 0;
+    let mouseX = 0;
+    let mouseY = 0;
+    let currentX = 0;
+    let currentY = 0;
 
-  document.addEventListener("mousemove", (e) => {
-    mouseX = e.clientX;
-    mouseY = e.clientY;
+    document.addEventListener("mousemove", (e) => {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
 
-    // Move cursor glow
-    cursorGlow.style.left = mouseX + "px";
-    cursorGlow.style.top = mouseY + "px";
-  });
+      // Move cursor glow directly for better responsiveness
+      cursorGlow.style.left = mouseX + "px";
+      cursorGlow.style.top = mouseY + "px";
+    });
 
-  // Smooth parallax animation
-  function animateParallax() {
-    // Smooth interpolation
-    currentX += (mouseX - currentX) * 0.05;
-    currentY += (mouseY - currentY) * 0.05;
+    // Smooth parallax animation
+    function animateParallax() {
+      // Smooth interpolation
+      currentX += (mouseX - currentX) * 0.05;
+      currentY += (mouseY - currentY) * 0.05;
 
-    const centerX = window.innerWidth / 2;
-    const centerY = window.innerHeight / 2;
+      const centerX = window.innerWidth / 2;
+      const centerY = window.innerHeight / 2;
 
-    const deltaX = (currentX - centerX) / centerX;
-    const deltaY = (currentY - centerY) / centerY;
+      const deltaX = (currentX - centerX) / centerX;
+      const deltaY = (currentY - centerY) / centerY;
 
-    // Move stars container (subtle)
-    if (starsContainer) {
-      starsContainer.style.transform = `translate(${deltaX * 15}px, ${deltaY * 15}px)`;
+      // Move stars container (subtle)
+      if (starsContainer) {
+        starsContainer.style.transform = `translate(${deltaX * 15}px, ${deltaY * 15}px)`;
+      }
+
+      // Move orbs (more dramatic)
+      if (orb1 instanceof HTMLElement) {
+        orb1.style.transform = `translate(${deltaX * 40}px, ${deltaY * 40}px)`;
+      }
+      if (orb2 instanceof HTMLElement) {
+        orb2.style.transform = `translate(${deltaX * -30}px, ${deltaY * -30}px)`;
+      }
+
+      requestAnimationFrame(animateParallax);
     }
 
-    // Move orbs (more dramatic)
-    if (orb1) {
-      orb1.style.transform = `translate(${deltaX * 40}px, ${deltaY * 40}px)`;
-    }
-    if (orb2) {
-      orb2.style.transform = `translate(${deltaX * -30}px, ${deltaY * -30}px)`;
-    }
-
-    requestAnimationFrame(animateParallax);
+    animateParallax();
   }
-
-  animateParallax();
 </script>
